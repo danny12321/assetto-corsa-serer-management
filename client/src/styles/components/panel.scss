@@ -1,0 +1,16 @@
+.panel {
+  width: "100%";
+  border: 1px solid black;
+  overflow: hidden;
+
+  &__header {
+    padding: 10px;
+  }
+
+  &__body {
+
+    & > div {
+        padding: 10px;
+    }
+  }
+}
