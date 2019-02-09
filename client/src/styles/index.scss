@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Muli");
+@import './colors.scss';
 @import './components/index.scss';
 @import './routes/index.scss';
 
@@ -9,7 +10,10 @@ body {
 }
 
 .container {
+  position: relative;
   padding: 10px;
+  height: calc(100vh - 51px - 20px);
+  width: calc(100% - 20px);
 }
 
 .grid {

@@ -1,7 +1,6 @@
 import React from "react";
 
-export default (data) => {
-  console.log(data)
+export default data => {
   return (
     <React.Fragment>
       <table>
@@ -9,28 +8,28 @@ export default (data) => {
           <tr>
             <td>Name</td>
             <td>
-              <input />
+              <input defaultValue={data.SERVER.NAME} />
             </td>
           </tr>
 
           <tr>
             <td>Password</td>
             <td>
-              <input />
+              <input defaultValue={data.SERVER.PASSWORD} />
             </td>
           </tr>
 
           <tr>
             <td>Adminpsw</td>
             <td>
-              <input />
+              <input defaultValue={data.SERVER.ADMIN_PASSWORD} />
             </td>
           </tr>
 
           <tr>
             <td>Result Screen Time</td>
             <td>
-              <input />
+              <input defaultValue={"UNKNOWN"} />
             </td>
           </tr>
         </tbody>
@@ -49,7 +48,7 @@ export default (data) => {
       </div>
 
       <div>
-        <input type="checkbox" id /> Show on Lobby
+        <input type="checkbox" /> Show on Lobby
       </div>
     </React.Fragment>
   );

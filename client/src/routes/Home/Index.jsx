@@ -1,16 +1,26 @@
 import React, { Component } from "react";
+import Paper from "../../components/Paper";
 
-export default class Cars extends Component {
+export default class Home extends Component {
   render() {
     return (
       <div className="home">
-        <h2>Home</h2>
 
-        <h3>Todo's</h3>
-        <ul>
-          <li>Read config file's</li>
-          <li>Write config file's</li>
-        </ul>
+        <Paper title="Welcome">
+          Thanks for using AC Server manager!
+        </Paper>
+
+
+        <Paper title="Todo's">
+          <ul>
+            <li>Save Settings</li>
+            <li>Select track</li>
+            <li>List cars</li>
+            <li>Select cars</li>
+            <li>Change weather</li>
+            <li>Make instructions</li>
+          </ul>
+        </Paper>
       </div>
     );
   }
