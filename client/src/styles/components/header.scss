@@ -39,6 +39,14 @@
         cursor: pointer;
         background: #ccc;
       }
+
+      &.save {
+        background: $blue;
+        margin: 10px;
+        padding: 0 10px;
+        border-radius: 5px;
+        color: white;
+      }
     }
   }
 }

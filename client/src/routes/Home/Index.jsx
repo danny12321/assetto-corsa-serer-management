@@ -19,6 +19,7 @@ export default class Home extends Component {
             <li>Select cars</li>
             <li>Change weather</li>
             <li>Make instructions</li>
+            <li>Use lazy loading</li>
           </ul>
         </Paper>
       </div>

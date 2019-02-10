@@ -1,59 +1,107 @@
 import React, { Component } from "react";
-import axios from "axios";
-import Loading from "../../components/Loading";
 import Paper from "../../components/Paper";
+import MyContext from '../../MyContext';
 
-export default class Cars extends Component {
+class Cars extends Component {
   state = {
-    cars: null
+    selectedCars: {}
   };
 
-  componentDidMount() {
-    this.fetchCars();
+
+  handleSelectedCars(car) {
+    let { selectedCars } = this.state;
+
+    if (selectedCars[car.name]) {
+      delete selectedCars[car.name];
+    } else {
+      selectedCars[car.name] = {
+        name: car.name,
+        skins: {}
+      }
+    }
+
+    this.setState({ selectedCars })
   }
 
-  fetchCars() {
-    axios.post("/api/cars/fetchAll").then(res => {
-      this.setState({ cars: res.data });
-    });
+  handleSetSkin(car, skin, amount) {
+    let { selectedCars } = this.state;
+
+    if (amount <= 0) {
+      delete selectedCars[car.name].skins[skin];
+    } else {
+      selectedCars[car.name].skins[skin] = amount
+    }
+
+    this.setState({ selectedCars })
   }
 
   render() {
-    if (!this.state.cars) return <Loading />;
+    const { selectedCars } = this.state;
+    const { cars } = this.props.context;
 
     return (
       <div className="cars grid">
-        {this.state.cars.map(car => {
+        {cars.map(car => {
+          const isSelected = selectedCars[car.name] ? true : false;
+
           return (
             <div key={car.name} className="grid__item">
-              <Paper title={car.name}>
-                {car.skins.map(skin => {
-                  return (
-                    <div className="cars__car">
-                      <img
-                        src={`/api/cars/preview?car=${car.name}&skin=${skin}`}
-                        alt="preview"
-                        width="200px"
-                        onError={e =>
-                          (e.target.src =
-                            "https://cheaphotels4uk.com/wp-content/uploads/2017/12/race-wide.jpg")
-                        }
-                      />
 
-                      <input
-                        type="number"
-                        defaultValue={0}
-                        min={0}
-                        style={{
-                          position: "absolute",
-                          bottom: 5,
-                          right: 5,
-                          width: 40
-                        }}
-                      />
-                    </div>
-                  );
-                })}
+              <Paper
+                isSelected={isSelected}
+                title={
+                  <React.Fragment>
+                    <input type="checkbox" onChange={() => this.handleSelectedCars(car)} />
+                    {car.name}
+                  </React.Fragment>
+                }
+              >
+
+                {isSelected ?
+
+                  car.skins.map(skin => {
+                    return (
+                      <div key={skin} className="cars__car">
+                        <img
+                          src={`/api/cars/preview?car=${car.name}&skin=${skin}`}
+                          alt="preview"
+                          width="200px"
+                          onError={e =>
+                            (e.target.src =
+                              "https://cheaphotels4uk.com/wp-content/uploads/2017/12/race-wide.jpg")
+                          }
+                        />
+
+                        <input
+                          type="number"
+                          onChange={e => {
+                            this.handleSetSkin(car, skin, e.target.value)
+                          }}
+                          value={selectedCars[car.name].skins[skin] || 0}
+                          min={0}
+                          style={{
+                            position: "absolute",
+                            bottom: 5,
+                            right: 5,
+                            width: 40
+                          }}
+                        />
+                      </div>
+                    );
+                  })
+                  :
+                  <div className="cars__car">
+                    <img
+                      src={`/api/cars/preview?car=${car.name}&skin=${car.skins[0]}`}
+                      alt="preview"
+                      width="200px"
+                      onError={e =>
+                        (e.target.src =
+                          "https://cheaphotels4uk.com/wp-content/uploads/2017/12/race-wide.jpg")
+                      }
+                    />
+                  </div>
+                }
               </Paper>
             </div>
           );
@@ -62,3 +110,10 @@ export default class Cars extends Component {
     );
   }
 }
+
+
+export default props => (
+  <MyContext.Consumer>
+    {context => <Cars {...props} context={context} />}
+  </MyContext.Consumer>
+)

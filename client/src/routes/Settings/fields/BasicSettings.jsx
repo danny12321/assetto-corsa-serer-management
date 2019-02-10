@@ -8,21 +8,21 @@ export default data => {
           <tr>
             <td>Name</td>
             <td>
-              <input defaultValue={data.SERVER.NAME} />
+              <input id="name" defaultValue={data.SERVER.NAME} />
             </td>
           </tr>
 
           <tr>
             <td>Password</td>
             <td>
-              <input defaultValue={data.SERVER.PASSWORD} />
+              <input id="pwd" defaultValue={data.SERVER.PASSWORD} />
             </td>
           </tr>
 
           <tr>
             <td>Adminpsw</td>
             <td>
-              <input defaultValue={data.SERVER.ADMIN_PASSWORD} />
+              <input id="c" defaultValue={data.SERVER.ADMIN_PASSWORD} />
             </td>
           </tr>
 
@@ -36,19 +36,19 @@ export default data => {
       </table>
 
       <div>
-        <input type="checkbox" /> Pickup Mode
+        <input id="pickup_mode" type="checkbox" defaultChecked={parseInt(data.SERVER.PICKUP_MODE_ENABLED)} /> <label htmlFor="pickup_mode">Pickup Mode</label>
       </div>
 
       <div>
-        <input type="checkbox" /> Loop Mode
+        <input id="loop_mode" type="checkbox" defaultChecked={parseInt(data.SERVER.LOOP_MODE)} /> <label htmlFor="loop_mode">Loop Mode</label>
       </div>
 
       <div>
-        <input type="checkbox" /> Pickup Locked Entry List
+        <input id="pickup_locked_entry_list" type="checkbox" disabled /> <label htmlFor="pickup_locked_entry_list">Pickup Locked Entry List</label>
       </div>
 
       <div>
-        <input type="checkbox" /> Show on Lobby
+        <input id="show_on_lobby" type="checkbox" disabled /> <label htmlFor="show_on_lobby">Show on Lobby</label>
       </div>
     </React.Fragment>
   );

@@ -1,29 +1,15 @@
 import React, { Component } from "react";
-import axios from "axios";
-import Loading from "../../components/Loading";
 import Paper from "../../components/Paper";
+import MyContext from '../../MyContext';
 
-export default class Track extends Component {
-  state = {
-    tracks: null
-  };
-
-  componentDidMount() {
-    this.fetchTracks();
-  }
-
-  fetchTracks() {
-    axios.post("/api/track/fetchAll").then(res => {
-      this.setState({ tracks: res.data });
-    });
-  }
+class Track extends Component {
 
   render() {
-    if (!this.state.tracks) return <Loading />;
+    const { tracks } = this.props.context;
 
     return (
       <div className="track grid">
-        {this.state.tracks.map(track => {
+        {tracks.map(track => {
           return (
             <div key={track.path} className="grid__item">
               <Paper title={track.name}>
@@ -61,3 +47,9 @@ export default class Track extends Component {
     );
   }
 }
+
+export default props => (
+  <MyContext.Consumer>
+    {context => <Track {...props} context={context} />}
+  </MyContext.Consumer>
+)

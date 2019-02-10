@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import MyContext from '../MyContext';
 
-export default class Header extends Component {
+class Header extends Component {
   render() {
     return (
       <header className="header">
@@ -25,8 +26,16 @@ export default class Header extends Component {
           <Link to="/cars">
             <div className="header__items__item">Cars</div>
           </Link>
+
+          <div className="header__items__item save" onClick={() => this.props.context.save()}>Save</div>
         </div>
       </header>
     );
   }
 }
+
+export default props => (
+  <MyContext.Consumer>
+    {context => <Header {...props} context={context} />}
+  </MyContext.Consumer>
+)
