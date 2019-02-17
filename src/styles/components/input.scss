@@ -1,0 +1,43 @@
+.form-group {
+    position: relative;
+    margin-top: 20px;
+    width: fit-content;
+
+    span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: 300ms;
+        font-size: 14px;
+
+        &.active {
+            top: -13px;
+            font-size: 12px;
+        }
+    }
+
+    input {
+        outline: none;
+        border: none;
+        border-bottom: 1px solid black;
+        background: transparent;
+        position: relative;
+    }
+
+    &::before, &::after {
+        transition: 500ms;
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        right: 50%;
+        z-index: 10;
+        height: 1px;
+        background: $blue;
+    }
+
+    &.active {
+        &::before { left: 0}
+        &::after { right: 0}
+    }
+}

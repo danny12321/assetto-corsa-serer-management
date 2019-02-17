@@ -1,0 +1,75 @@
+{
+  "name": "ac_server_manager",
+  "version": "0.1.0",
+  "private": true,
+  "author": {
+    "name": "Danny Berkelaar",
+    "email": "dannyberkelaar@gmail.com",
+    "url": "https://github.com/danny12321"
+  },
+  "description": "AC Server Manager",
+  "homepage": "./",
+  "main": "public/electron.js",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-is-dev": "^0.3.0",
+    "electron-publisher-s3": "^20.17.2",
+    "electron-store": "^2.0.0",
+    "fs": "0.0.1-security",
+    "node-sass": "^4.11.0",
+    "react": "^16.8.1",
+    "react-dev-utils": "^5.0.1",
+    "react-router-dom": "^4.3.1",
+    "tree-kill": "^1.2.1"
+  },
+  "devDependencies": {
+    "react-scripts": "2.1.5",
+    "react-dom": "^16.8.1",
+    "concurrently": "^3.6.0",
+    "cross-env": "^5.2.0",
+    "electron": "^4.0.4",
+    "electron-builder": "^20.18.0",
+    "version-bump-prompt": "^4.1.0"
+  },
+  "scripts": {
+    "dev": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "start": "concurrently \"cross-env BROWSER=none react-scripts start\" \"electron .\"",
+    "pack": "electron-builder --dir",
+    "dist": "npx build --x64 --win --c.extraMetadata.main=build/electron.js -p always"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "build": {
+    "appId": "https://github.com/danny12321",
+    "compression": "normal",
+    "productName": "Assetto Corsa Server Manager",
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "target": [
+        "deb",
+        "AppImage"
+      ],
+      "description": "Example",
+      "category": "Network;Feed"
+    }
+  }
+}

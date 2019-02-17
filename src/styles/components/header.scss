@@ -1,0 +1,49 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: white;
+  box-shadow: 0px 0px 20px -7px black;
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    height: 100%;
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+  &__title {
+    font-size: 25px;
+    padding: 10px;
+  }
+
+  &__items {
+    padding-right: 10px;
+    display: flex;
+
+@media only screen and (max-width: $breakmobile) {
+  display: none;
+}
+
+
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 500ms;
+      padding: 10px;
+
+      // 100% - padding
+      height: calc(100% - 20px);
+      margin: 0 5px;
+
+      &:hover {
+        cursor: pointer;
+        background: #ccc;
+      }
+    }
+  }
+}

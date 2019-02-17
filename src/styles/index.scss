@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css?family=Muli");
+@import './colors.scss';
+@import './vars.scss';
+
+@import './components/index.scss';
+@import './routes/index.scss';
+
+body {
+  padding: 0;
+  margin: 0;
+  margin-top: 50px;
+  font-family: "Muli", sans-serif;
+
+}
+
+.container {
+  position: relative;
+  padding: 10px;
+  height: calc(100vh - 51px - 20px);
+  width: calc(100% - 20px);
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  > div {
+    flex: 1;
+    margin: 10px;
+  }
+}

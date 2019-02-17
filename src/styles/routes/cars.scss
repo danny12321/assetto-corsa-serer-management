@@ -1,0 +1,17 @@
+.cars { 
+    justify-content: space-between !important;
+
+    &__car {
+        position: relative;
+        cursor: pointer;
+
+        &__wrapper {
+            position: relative;
+            text-align: center;
+
+            img {
+                width: 250px;
+            }
+        }
+    }
+}
