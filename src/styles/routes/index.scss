@@ -1,4 +1,12 @@
 @import './home.scss';
 @import './track.scss';
 @import './cars.scss';
-@import './skins.scss';
+
+.route {
+    padding: $containerPadding;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

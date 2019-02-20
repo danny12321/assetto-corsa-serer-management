@@ -26,36 +26,37 @@ module.exports = {
         return cars;
     },
 
-    bboi: '',
-
     fetchSelected: () => {
-        let selectedCars = {};
+        let selectedCars = [];
         var cars = ini.parse(fs.readFileSync(`${store.get('ac_path')}/server/cfg/entry_list.ini`, 'utf-8'))
 
         for (let carKey in cars) {
             let car = cars[carKey];
 
-            if (selectedCars[car.MODEL]) {
-                if (selectedCars[car.MODEL].skins[car.SKIN]) {
-                    selectedCars[car.MODEL].skins[car.SKIN].amount++;
-                } else {
-                    selectedCars[car.MODEL].skins[car.SKIN] = {
-                        name: car.SKIN,
-                        amount: 1
-                    }
-                }
-
-            } else {
-                // Can't set the object like {name: car.name, skins: {...}}
-                // Don't know why
-                selectedCars[car.MODEL] = {}
-                selectedCars[car.MODEL].name = car.MODEL
-
-                selectedCars[car.MODEL].skins = {}
-                selectedCars[car.MODEL].skins[car.SKIN] = {name: car.SKIN, amount: 1}
-            }
+            selectedCars.push({
+                name: car.MODEL,
+                skin: car.SKIN
+            });
         }
 
         return selectedCars;
+    },
+
+    save: data => {
+        let entry_list = {}
+
+        data.forEach((car, key) => {
+            entry_list[`CAR_${key}`] = {
+                MODEL: car.name,
+                SKIN: car.skin,
+                SPECTATOR_MODE: 0,
+                DRIVERNAME: null,
+                TEAM: null,
+                GUID: null,
+                BALLAST: 0
+            }
+        })
+
+        fs.writeFileSync(`${store.get('ac_path')}/server/cfg/entry_list.ini`, ini.stringify(entry_list))
     }
 }

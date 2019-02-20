@@ -67,41 +67,43 @@ class Settings extends Component {
     const config = this.props.context.settings;
 
     return (
-      <form onChange={this.setSettings.bind(this)}>
-        <div className="flex">
-          <div>
-            <Paper title="Basic settings">
-              <BasicSettings {...config} />
-            </Paper>
-          </div>
+      <div className="route">
+        <form onChange={this.setSettings.bind(this)}>
+          <div className="flex">
+            <div>
+              <Paper title="Basic settings">
+                <BasicSettings {...config} />
+              </Paper>
+            </div>
 
-          <div>
-            <Paper title="Dynamic Track">
-              <DynamicTrack {...config} />
-            </Paper>
-          </div>
+            <div>
+              <Paper title="Dynamic Track">
+                <DynamicTrack {...config} />
+              </Paper>
+            </div>
 
-          <div>
-            <Paper title="Assists">
-              <Assists {...config} />
-            </Paper>
-          </div>
+            <div>
+              <Paper title="Assists">
+                <Assists {...config} />
+              </Paper>
+            </div>
 
-          <div>
-            <Paper title="Realism">
-              <Realism {...config} />
-            </Paper>
-          </div>
+            <div>
+              <Paper title="Realism">
+                <Realism {...config} />
+              </Paper>
+            </div>
 
-          <div>
-            <Paper title="Voting and Banning">
-              <div>body hiero</div>
-            </Paper>
-          </div>
+            <div>
+              <Paper title="Voting and Banning">
+                <div>body hiero</div>
+              </Paper>
+            </div>
 
-          {/* <button type="submit">Save</button> */}
-        </div>
-      </form>
+            {/* <button type="submit">Save</button> */}
+          </div>
+        </form>
+      </div>
     );
   }
 }

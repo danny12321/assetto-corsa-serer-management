@@ -10,6 +10,7 @@ module.exports = {
     },
 
     save: settings => {
+        return
         const cars = fetchCars.fetchSelected();
         settings.SERVER.CARS = '';
 

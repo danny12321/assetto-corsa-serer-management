@@ -175,7 +175,8 @@ exports.startServer = () => {
 	// mainWindow.webContents.send('ping', 'whoooooooh!')
 	
 	ac_server = spawn(`cd ${store.get('ac_path')}/server/ && acServer.exe`, {
-		shell: true
+		shell: true,
+		detached: true
 	});
 
 	ac_server.stderr.on('data', function (data) {
@@ -192,9 +193,4 @@ exports.startServer = () => {
 		console.log("Child exited with code: " + exitCode);
 		mainWindow.webContents.send('serverUpdate', {type: 'exit', data: exitCode})
 	});
-}
-
-exports.stopServer = () => {
-	console.log(ac_server)
-	ac_server.kill('SIGHUP');
 }

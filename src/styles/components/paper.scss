@@ -1,6 +1,5 @@
 .paper {
   position: relative;
-  height: 100%;
 
   &.selected .paper__title {
     background: rgb(34, 202, 0);
@@ -24,6 +23,9 @@
 
   &__body {
     // 100% - padding top and padding bottom - paper margintop
+    background:  rgba(255, 255,255, .5); //#fffefe;
+ 
+
     height: calc(100% - 50px - 30px);
     padding: 30px 10px;
     padding-bottom: 20px;

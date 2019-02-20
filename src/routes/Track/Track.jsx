@@ -18,7 +18,7 @@ class Track extends Component {
 
 
     return (
-      <div className="track">
+      <div className="route track">
 
         <Input
           type="text"

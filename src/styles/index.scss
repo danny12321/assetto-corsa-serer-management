@@ -10,14 +10,41 @@ body {
   margin: 0;
   margin-top: 50px;
   font-family: "Muli", sans-serif;
-
 }
 
 .container {
   position: relative;
-  padding: 10px;
-  height: calc(100vh - 51px - 20px);
-  width: calc(100% - 20px);
+  
+  &__inner{
+    position: relative;
+    height: calc(100vh - #{$headerHeight} - 20px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  &__background {
+    background-image: url("/assets/images/background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(4px) brightness(165%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -99;
+
+    &::after {
+      content: "";
+      background: rgba(255, 255, 255, .25);
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
 }
 
 .flex {
@@ -28,5 +55,57 @@ body {
   > div {
     flex: 1;
     margin: 10px;
+  }
+}
+
+input[type='checkbox'] {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.fade-enter {
+  animation-name: fadeEnter;
+  animation-duration: 1s;
+  z-index: 99;
+  transform: scale(0.7) translateX(calc(100vw + 50%));
+}
+
+.fade-exit {
+  transform: scale(0.7) translateX(calc(-100vw - 50%));
+
+  animation-name: fadeExit;
+  animation-duration: 1s;
+  
+}
+
+@keyframes fadeExit {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(0.7) translateX(calc(-100vw - 50%));
+  }
+}
+
+@keyframes fadeEnter {
+  50% {
+    transform: scale(0.7) translateX(calc(100vw + 50%));
+  }
+  75% {
+    transform: scale(0.7);
+  }
+  100% {
+    transform: scale(1);
   }
 }

@@ -28,10 +28,6 @@ class Header extends Component {
             <div className="header__items__item">Cars</div>
           </Link>
 
-          <Link to="/skins">
-            <div className="header__items__item">Skins</div>
-          </Link>
-
           <Link to="/server">
             <div className="header__items__item">Server</div>
           </Link>

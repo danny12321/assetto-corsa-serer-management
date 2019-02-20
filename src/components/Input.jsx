@@ -11,8 +11,6 @@ export default class input extends Component {
       type: this.props.type,
     }
 
-    console.log(this.props.value)
-
     if (this.props.value) inputProps.value = this.props.value;
     if (this.props.defaultValue) inputProps.defaultValue = this.props.defaultValue;
     if (this.props.id) inputProps.id = this.props.id;
@@ -26,7 +24,7 @@ export default class input extends Component {
     };
 
     return (
-      <div className={`form-group ${this.state.value ? 'active' : ''}`}>
+      <div className={`form-group type_text ${this.state.value ? 'active' : ''}`}>
 
         <span
           className={this.state.value ? 'active' : ''}

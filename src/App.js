@@ -25,13 +25,25 @@ class MyProvider extends Component {
     selectedCars: fetch.cars.fetchSelected(),
     selectedTrack: null,
     serverData: [],
-    serverOn: false
+    serverOn: false,
+    carsToSelect: {}
   }
 
   componentDidMount() {
+    // SET CARS TO SELECT IN OBJECT
+    let { carsToSelect } = this.state;
+
+    this.state.selectedCars.forEach(carSelected => {
+      let car = this.state.cars.find(a => a.name === carSelected.name);
+      carsToSelect[car.name] = car;
+    });
+
+    this.setState({ carsToSelect });
+
+
     ipcRenderer.on('serverUpdate', (event, data) => {
       this.setState({ serverData: [...this.state.serverData, data] })
-    })
+    });
   }
 
   save() {
@@ -45,6 +57,18 @@ class MyProvider extends Component {
     })
   }
 
+  updateCarsToSelect(car, value) {
+    let { carsToSelect } = this.state;
+
+    if (value) {
+      carsToSelect[car.name] = car;
+    } else if (carsToSelect[car.name]) {
+      delete carsToSelect[car.name];
+    }
+
+    this.setState({ carsToSelect })
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -52,6 +76,9 @@ class MyProvider extends Component {
           settings: this.state.settings,
           tracks: this.state.tracks,
           cars: this.state.cars,
+
+          carsToSelect: this.state.carsToSelect,
+          setCarsToSelect: (car, value) => this.updateCarsToSelect(car, value),
 
           selectedCars: this.state.selectedCars,
           selectedTrack: this.state.selectedTrack,
@@ -63,14 +90,14 @@ class MyProvider extends Component {
 
           setSettings: settings => {
             this.setState({ settings })
-            fetch.settings.save();
+            fetch.settings.save(settings);
           },
 
-          setSelectedCars: selectedCars => {
+          setSelectedCars: (selectedCars) => {
             this.setState({ selectedCars })
-            fetch.settings.save();
+            fetch.cars.save(selectedCars);
           },
-          
+
           setSelectedTrack: track => {
             this.setState({ selectedTrack: track.name })
           },

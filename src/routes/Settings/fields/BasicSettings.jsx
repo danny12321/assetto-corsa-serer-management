@@ -1,5 +1,6 @@
 import React from "react";
 import Input from '../../../components/Input'
+import Checkbox from '../../../components/Checkbox';
 
 export default data => {
   return (
@@ -28,21 +29,30 @@ export default data => {
         defaultValue={"UNKNOWN"}
       />
 
-      <div>
-        <input id="pickup_mode" type="checkbox" defaultChecked={parseInt(data.SERVER.PICKUP_MODE_ENABLED)} /> <label htmlFor="pickup_mode">Pickup Mode</label>
-      </div>
+      <Checkbox
+        id="pickup_mode"
+        defaultChecked={parseInt(data.SERVER.PICKUP_MODE_ENABLED)}
+        label="Pickup Mode"
+      />
 
-      <div>
-        <input id="loop_mode" type="checkbox" defaultChecked={parseInt(data.SERVER.LOOP_MODE)} /> <label htmlFor="loop_mode">Loop Mode</label>
-      </div>
+      <Checkbox
+        id="loop_mode"
+        defaultChecked={parseInt(data.SERVER.LOOP_MODE)}
+        label="Loop Mode"
+      />
 
-      <div>
-        <input id="pickup_locked_entry_list" type="checkbox" disabled /> <label htmlFor="pickup_locked_entry_list">Pickup Locked Entry List</label>
-      </div>
+      <Checkbox
+        id="pickup_locked_entry_list"
+        label="Pickup Locked Entry List"
+        disabled
+      />
 
-      <div>
-        <input id="show_on_lobby" type="checkbox" disabled /> <label htmlFor="show_on_lobby">Show on Lobby</label>
-      </div>
+      <Checkbox
+        id="show_on_lobby"
+        label="Show on Lobby"
+        disabled
+      />
+
     </React.Fragment>
   );
 };

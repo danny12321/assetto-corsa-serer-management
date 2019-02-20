@@ -3,41 +3,104 @@
     margin-top: 20px;
     width: fit-content;
 
-    span {
-        position: absolute;
-        top: 0;
-        left: 0;
-        transition: 300ms;
-        font-size: 14px;
+    &.type_text {
 
+        span {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: 300ms;
+            font-size: 14px;
+            
+            &.active {
+                top: -13px;
+                font-size: 12px;
+            }
+        }
+        
+        input {
+            outline: none;
+            border: none;
+            border-bottom: 1px solid black;
+            background: transparent;
+            position: relative;
+        }
+        
+        &::before, &::after {
+            transition: 500ms;
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            right: 50%;
+            z-index: 10;
+            height: 1px;
+            background: $blue;
+        }
+        
         &.active {
-            top: -13px;
-            font-size: 12px;
+            &::before { left: 0}
+            &::after { right: 0}
         }
     }
+        
+    &.type_checkbox {
+        margin-top: 5px;
 
-    input {
-        outline: none;
-        border: none;
-        border-bottom: 1px solid black;
-        background: transparent;
-        position: relative;
-    }
+        & * {
+            cursor: pointer;
+        }
+        
+        input {
+            display: none;
+        }
 
-    &::before, &::after {
-        transition: 500ms;
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        right: 50%;
-        z-index: 10;
-        height: 1px;
-        background: $blue;
-    }
+        .checkmark {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 1px solid black;
+            position: relative;
+            overflow: hidden;
+            border-radius: 50%;
+            transition: 500ms;
 
-    &.active {
-        &::before { left: 0}
-        &::after { right: 0}
+            &::before, &::after {
+                content: "";
+                position: absolute;
+                height: 0;
+                width: 0;
+                top: 50%;
+                opacity: 0;
+                transition: opacity 100ms, width 500ms, height 500ms;
+                outline: 1px solid black;
+            }
+
+            &::before{
+                left: calc(50% + 3px);
+                transform: translateY(-50%) rotateZ(45deg);
+            }
+
+            &::after {
+                left: calc(50% - 3px);
+                transform: translate(-100%, -50%) rotateZ(45deg);
+            }
+
+
+        }
+
+        &.active {
+
+            .checkmark {
+                border-radius: 3px;
+            }
+
+            .checkmark::before, .checkmark::after {
+                opacity: 1;
+                height: 12px;
+                width: 12px;
+            }
+        }
+            
     }
 }

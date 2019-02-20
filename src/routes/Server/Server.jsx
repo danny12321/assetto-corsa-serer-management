@@ -18,29 +18,31 @@ class Server extends Component {
 
     render() {
         return (
-            <Paper title="Server">
-                {this.props.context.serverOn ?
-                    <div onClick={() => this.stopServer()}>
-                        Stop server
+            <div className="route server">
+                <Paper title="Server">
+                    {this.props.context.serverOn ?
+                        <div onClick={() => this.stopServer()}>
+                            Stop server
                 </div>
-                    :
-                    <div onClick={() => this.startServer()}>
-                        Start server
+                        :
+                        <div onClick={() => this.startServer()}>
+                            Start server
                 </div>
-                }
+                    }
 
-                <div>
+                    <div>
 
-                    {this.props.context.serverData.map((data, key) => {
-                        return (
-                            <div key={key}>
-                                {data.data}
-                            </div>
-                        )
-                    })}
+                        {this.props.context.serverData.map((data, key) => {
+                            return (
+                                <div key={key}>
+                                    {data.data}
+                                </div>
+                            )
+                        })}
 
-                </div>
-            </Paper>
+                    </div>
+                </Paper>
+            </div>
         )
     }
 }

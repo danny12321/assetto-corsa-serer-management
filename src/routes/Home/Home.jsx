@@ -4,7 +4,7 @@ import Paper from "../../components/Paper";
 export default class Home extends Component {
   render() {
     return (
-      <div className="home">
+      <div className="route home">
 
         <Paper title="Welcome">
           Thanks for using AC Server manager!

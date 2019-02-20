@@ -1,55 +1,53 @@
 import React, { Component } from "react";
-import Paper from "../../components/Paper";
 import MyContext from '../../MyContext';
-import Input from '../../components/Input'
+
+import SelectCar from './SelectCar';
+import AddCar from './AddCar';
+import SelectedCars from './SelectedCars';
 
 const Store = window.require('electron-store');
 const store = new Store();
 
 class Cars extends Component {
-  state = {
-    search: ''
-  }
-
-  handleSelectedCars(car) {
-    let { selectedCars } = this.props.context;
-
-    if (selectedCars[car.name]) {
-      delete selectedCars[car.name];
-    } else {
-      selectedCars[car.name] = {
-        name: car.name,
-        skins: {}
-      }
-    }
-
-    this.props.context.setSelectedCars(selectedCars)
-  }
 
   render() {
-    const { cars, selectedCars } = this.props.context;
-    const { search } = this.state
+    const { cars, carsToSelect } = this.props.context;
+    let { selectedCars } = this.props.context;
+    const ac_path = store.get('ac_path');
 
+    console.log(carsToSelect)
     return (
-      <div className="cars">
+      <div className="route cars">
 
-      <Input 
-            type="text"
-            label={"Search"}
-            value={search}
-            onChange={e => this.setState({ search: e.target.value })}
-      />
-
-        {/* <div className="form-group">
-          <input
-            type="text"
-            placeholder="Search"
-            value={search}
-            onChange={e => this.setState({ search: e.target.value })}
+        <div className="flex nowrap cars__container">
+          <SelectCar
+            cars={cars}
+            carsToSelect={carsToSelect}
+            update={(car, value) => this.props.context.setCarsToSelect(car, value)}
           />
-        </div> */}
 
-        <div className="flex">
+          <AddCar
+            ac_path={ac_path}
+            carsToSelect={carsToSelect}
+            add={(car, skin) => {
+              selectedCars.push({ name: car.name, skin });
+              this.props.context.setSelectedCars(selectedCars);
+            }}
+          />
+
+          <SelectedCars
+            ac_path={ac_path}
+            selectedCars={selectedCars}
+            remove={index => {
+              selectedCars.splice(index, 1);
+              this.props.context.setSelectedCars(selectedCars);
+            }}
+          />
+        </div>
+
+
+
+        {/* <div className="flex">
           {cars.map(car => {
             if (!car.name.includes(this.state.search)) return null
 
@@ -76,7 +74,7 @@ class Cars extends Component {
               </div>
             );
           })}
-        </div>
+        </div> */}
 
       </div>
     );
